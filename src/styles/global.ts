@@ -6,9 +6,12 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
   :focus {
     outline:0;
+    box-shadow: 0 0 0 1px ${(props) => props.theme['blue-500']};
   }
+
   body {
     background: ${(props) => props.theme['gray-800']};
     color: ${(props) => props.theme['gray-100']};
