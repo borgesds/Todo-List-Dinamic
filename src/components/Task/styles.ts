@@ -16,4 +16,24 @@ export const TaskContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  input {
+    width: 15px;
+    height: 15px;
+  }
+
+  label {
+    padding-left: 1rem;
+  }
+
+  button {
+    border: 0;
+    background: transparent;
+    color: ${(props) => props.theme['red-500']};
+    cursor: pointer;
+
+    &:hover {
+      color: ${(props) => props.theme['red-300']};
+    }
+  }
 `

@@ -5,7 +5,7 @@ export function Task() {
   return (
     <TaskContainer>
       <TaskContent>
-        <input type="checkbox" id="teste" />
+        <input type="checkbox" id="key" />
         <label htmlFor="teste">Estudar React com o Next</label>
         <button>
           <Trash size={24} />
