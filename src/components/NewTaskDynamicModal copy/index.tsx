@@ -1,5 +1,6 @@
-/* import * as Dialog from '@radix-ui/react-dialog'
-import { Content, Overlay } from './styles'
+import * as Dialog from '@radix-ui/react-dialog'
+import { X } from 'phosphor-react'
+import { CloseButton, Content, Overlay } from './styles'
 
 export function NewTaskDynamic() {
   return (
@@ -10,10 +11,15 @@ export function NewTaskDynamic() {
         <Content>
           <Dialog.Title>Tarefas Fixas</Dialog.Title>
 
-          <Dialog.Close>X</Dialog.Close>
+          <CloseButton>
+            <X />
+          </CloseButton>
 
           <form action="">
             <input type="text" placeholder="Nova Tarefa" required />
+
+            <label>Tempo da tarefa</label>
+            <input type="number" required />
 
             <button type="submit">Cadastrar Tarefa</button>
           </form>
@@ -21,4 +27,4 @@ export function NewTaskDynamic() {
       </Dialog.Portal>
     </div>
   )
-} */
+}

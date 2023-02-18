@@ -2,20 +2,22 @@ import { CloudCheck } from 'phosphor-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ButtonContainer, HeaderContainer, HeaderContent, Logo } from './styles'
 import { NewTaskFixe } from '../NewTaskFixeModal'
-/* import { NewTaskDynamic } from '../NewTaskDinamicModal copy' */
+import { NewTaskDynamic } from '../NewTaskDynamicModal copy'
 
 export function Header() {
   return (
     <>
       <HeaderContainer>
         <HeaderContent>
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <ButtonContainer>Tarefas Fixas</ButtonContainer>
-            </Dialog.Trigger>
+          <div>
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <ButtonContainer>Tarefas Fixas</ButtonContainer>
+              </Dialog.Trigger>
 
-            <NewTaskFixe />
-          </Dialog.Root>
+              <NewTaskFixe />
+            </Dialog.Root>
+          </div>
 
           <Logo>
             <div>
@@ -25,13 +27,15 @@ export function Header() {
             <span>Cloud Task</span>
           </Logo>
 
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <ButtonContainer>Tarefas Dinâmicas</ButtonContainer>
-            </Dialog.Trigger>
+          <div>
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <ButtonContainer>Tarefas Dinâmicas</ButtonContainer>
+              </Dialog.Trigger>
 
-            {/* <NewTaskDynamic /> */}
-          </Dialog.Root>
+              <NewTaskDynamic />
+            </Dialog.Root>
+          </div>
         </HeaderContent>
       </HeaderContainer>
     </>

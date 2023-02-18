@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const TaskContainer = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
   background: ${(props) => props.theme['gray-800']};
 
   border: 1px solid ${(props) => props.theme['gray-700']};
@@ -23,7 +23,13 @@ export const TaskContent = styled.div`
   }
 
   label {
-    padding-left: 1rem;
+    margin-left: 2.25rem;
+    font-size: 0.875rem;
+  }
+
+  input:checked + label {
+    color: ${(props) => props.theme['gray-500']};
+    text-decoration: line-through;
   }
 
   button {
