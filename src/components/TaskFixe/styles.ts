@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const TaskContainer = styled.div`
+export const TaskContainer = styled.section`
   width: 100%;
   padding: 0.5rem;
   background: ${(props) => props.theme['gray-800']};

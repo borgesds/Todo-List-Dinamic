@@ -1,3 +1,4 @@
+import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import { TaskDynamic } from '../../components/TaskDynamic'
 import { TaskFixe } from '../../components/TaskFixe'
@@ -49,6 +50,8 @@ export function Home() {
           </div>
         </GridContainer>
       </MainContainer>
+
+      <Footer />
     </>
   )
 }

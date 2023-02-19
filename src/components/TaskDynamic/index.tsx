@@ -1,6 +1,6 @@
 import { Trash } from 'phosphor-react'
 import { useEffect, useState } from 'react'
-import { TaskContainer, TaskContent } from './styles'
+import { TaskContainer, TaskContent, TaskTime } from './styles'
 
 interface TaskDynamicInterface {
   id: number
@@ -28,15 +28,21 @@ export function TaskDynamic() {
     <>
       {taskDescription.map((item) => {
         return (
-          <TaskContainer key={item.id}>
-            <TaskContent>
-              <input type="checkbox" />
-              <label>{item.descriptionTask}</label>
-              <button>
-                <Trash size={24} />
-              </button>
-            </TaskContent>
-          </TaskContainer>
+          <section key={item.id}>
+            <TaskTime>
+              <span>Tempo da tarefa:</span>
+              <span>{item.time} Horas</span>
+            </TaskTime>
+            <TaskContainer>
+              <TaskContent>
+                <input type="checkbox" />
+                <label>{item.descriptionTask}</label>
+                <button>
+                  <Trash size={24} />
+                </button>
+              </TaskContent>
+            </TaskContainer>
+          </section>
         )
       })}
     </>

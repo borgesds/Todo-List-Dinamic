@@ -10,6 +10,18 @@ export const TaskContainer = styled.div`
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
   margin-bottom: 0.75rem;
 `
+export const TaskTime = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  span {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    color: ${(props) => props.theme['gray-500']};
+  }
+`
 
 export const TaskContent = styled.div`
   position: relative;
