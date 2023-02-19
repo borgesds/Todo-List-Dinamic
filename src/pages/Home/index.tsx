@@ -1,5 +1,6 @@
 import { Header } from '../../components/Header'
-import { Task } from '../../components/Task'
+import { TaskDynamic } from '../../components/TaskDynamic'
+import { TaskFixe } from '../../components/TaskFixe'
 import {
   CountTaskHeader,
   GridContainer,
@@ -28,17 +29,7 @@ export function Home() {
               </div>
             </CountTaskHeader>
 
-            <Task />
-
-            <Task />
-
-            <Task />
-
-            <Task />
-
-            <Task />
-
-            <Task />
+            <TaskFixe />
           </div>
 
           <div>
@@ -54,11 +45,7 @@ export function Home() {
               </div>
             </CountTaskHeader>
 
-            <Task />
-
-            <Task />
-
-            <Task />
+            <TaskDynamic />
           </div>
         </GridContainer>
       </MainContainer>
