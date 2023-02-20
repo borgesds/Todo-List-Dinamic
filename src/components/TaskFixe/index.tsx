@@ -2,12 +2,6 @@ import { Trash } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 import { TaskContainer, TaskContent } from './styles'
 
-interface TaskInterface {
-  id: number
-  descriptionTask: string
-  isCompleted: boolean
-}
-
 export function TaskFixe() {
   const [taskDescription, setTaskDescription] = useState<TaskInterface[]>([])
 
