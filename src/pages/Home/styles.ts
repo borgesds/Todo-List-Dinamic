@@ -12,6 +12,7 @@ export const MainContainer = styled.main`
 
 export const GridContainer = styled.div`
   width: 100%;
+  height: 100%;
   max-width: 1120px;
   display: grid;
   grid-template-columns: 1fr 1fr;

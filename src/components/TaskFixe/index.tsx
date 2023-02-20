@@ -5,6 +5,7 @@ import { TaskContainer, TaskContent } from './styles'
 interface TaskInterface {
   id: number
   descriptionTask: string
+  isCompleted: boolean
 }
 
 export function TaskFixe() {
@@ -20,6 +21,15 @@ export function TaskFixe() {
   useEffect(() => {
     loadTask()
   }, [])
+
+  function handleToggleTask(id: number) {
+    const taskListCompleted = taskDescription.map((task) => {
+      if (task.id === id) {
+        taskDescription.isCompleted = !task.isCompleted
+      }
+      return taskDescription
+    })
+  }
 
   return (
     <>

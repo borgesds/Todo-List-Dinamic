@@ -3,6 +3,12 @@ import styled from 'styled-components'
 export const FooterContainer = styled.footer`
   background: ${(props) => props.theme['gray-900']};
   padding: 96px;
+  width: 100%;
+  height: 100vh;
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  left: 0;
 `
 
 export const FooterContent = styled.div`
@@ -10,6 +16,10 @@ export const FooterContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  left: 0;
 
   display: flex;
   align-items: center;
