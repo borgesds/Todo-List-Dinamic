@@ -19,9 +19,7 @@ export function Footer() {
       <FooterContent>
         <div>
           <Logo>
-            <div>
-              <CloudCheck size={25} color={'white'} />
-            </div>
+            <CloudCheck size={25} color={'white'} />
 
             <span>Cloud Task</span>
           </Logo>

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const FooterContainer = styled.footer`
   background: ${(props) => props.theme['gray-900']};
-  padding: 1rem;
+  padding: 96px;
 `
 
 export const FooterContent = styled.div`
@@ -42,12 +42,30 @@ export const LinkContent = styled.div`
 
 export const Links = styled.div`
   display: flex;
-
   flex-direction: column;
+  padding-top: 1rem;
 
   span {
     font-size: 0.8rem;
     font-weight: bold;
-    color: ${(props) => props.theme['gray-100']};
+    color: ${(props) => props.theme['blue-300']};
+    padding-left: 1rem;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    a {
+      padding-bottom: 0.5rem;
+      text-decoration: none;
+      color: ${(props) => props.theme['gray-100']};
+      font-size: 0.75rem;
+
+      &:hover {
+        color: ${(props) => props.theme['blue-500']};
+      }
+    }
   }
 `
