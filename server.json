@@ -2,47 +2,13 @@
     "taskFixe": [
         {
             "id": 1,
-            "descriptionTask": "Dimensionar B2C na parte da manhã"
+            "descriptionTask": "Dimensionar B2C na parte da manhã",
+            "isCompleted": false
         },
         {
             "id": 2,
-            "descriptionTask": "Reunião com a Gerex a 15:00"
-        },
-        {
-            "id": 3,
-            "descriptionTask": "Atualizar relatório as 16:00"
-        },
-        {
-            "id": 4,
-            "descriptionTask": "Quarta-feira reunião com a Diretoria"
-        },
-        {
-            "id": 5,
-            "descriptionTask": "Mudar e padronizar nomes"
-        },
-        {
-            "id": 6,
-            "descriptionTask": "Reunião como BI as 14:00"
-        },
-        {
-            "id": 7,
-            "descriptionTask": "Mudar a base de dados"
-        },
-        {
-            "id": 8,
-            "descriptionTask": "Gerar links"
-        },
-        {
-            "id": 9,
-            "descriptionTask": "Relatório com a Gerex para quinta"
-        },
-        {
-            "id": 10,
-            "descriptionTask": "Reunião como RH"
-        },
-        {
-            "id": 11,
-            "descriptionTask": "Reunião como TI"
+            "descriptionTask": "Reunião com a Gerex a 15:00",
+            "isCompleted": false
         }
     ],
     "taskDynamic": [
