@@ -22,14 +22,14 @@ export function TaskFixe() {
     loadTask()
   }, [])
 
-  function handleToggleTask(id: number) {
+  /*  function handleToggleTask(id: number) {
     const taskListCompleted = taskDescription.map((task) => {
       if (task.id === id) {
         taskDescription.isCompleted = !task.isCompleted
       }
       return taskDescription
     })
-  }
+  } */
 
   return (
     <>

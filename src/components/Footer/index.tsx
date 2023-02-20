@@ -51,7 +51,7 @@ export function Footer() {
           </div>
 
           <div>
-            <span>By: BorgesDEV</span>
+            <span>https://github.com/borgesds</span>
           </div>
         </LinkContent>
       </FooterContent>

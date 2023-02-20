@@ -3,6 +3,7 @@ import { Header } from '../../components/Header'
 import { TaskDynamic } from '../../components/TaskDynamic'
 import { TaskFixe } from '../../components/TaskFixe'
 import {
+  Content,
   CountTaskHeader,
   GridContainer,
   MainContainer,
@@ -12,7 +13,7 @@ import {
 
 export function Home() {
   return (
-    <>
+    <Content>
       <Header />
 
       <MainContainer>
@@ -52,6 +53,6 @@ export function Home() {
       </MainContainer>
 
       <Footer />
-    </>
+    </Content>
   )
 }
