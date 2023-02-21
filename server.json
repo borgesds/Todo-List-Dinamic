@@ -8,24 +8,33 @@
         {
             "id": 2,
             "descriptionTask": "Reunião com a Gerex a 15:00",
-            "isCompleted": false
+            "isCompleted": true
         }
     ],
     "taskDynamic": [
         {
             "id": 1,
             "descriptionTask": "Entregar relatório dia 14/03/2023",
+            "isCompleted": false,
             "time": 1
         },
         {
             "id": 2,
             "descriptionTask": "Entregar dimensionamento dia 25/03/2023",
+            "isCompleted": true,
             "time": 4
         },
         {
             "id": 3,
             "descriptionTask": "Entregar relatório dia 21/03/2023",
+            "isCompleted": false,
             "time": 7
+        },
+        {
+            "id": 4,
+            "descriptionTask": "Entregar relatório dia 28/03/2023",
+            "isCompleted": false,
+            "time": 25
         }
     ]
 }

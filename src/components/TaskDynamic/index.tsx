@@ -1,32 +1,14 @@
 import { Trash } from 'phosphor-react'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { TaskContext } from '../../contexts/TaskContext'
 import { TaskContainer, TaskContent, TaskTime } from './styles'
 
-interface TaskDynamicInterface {
-  id: number
-  descriptionTask: string
-  time: number
-}
-
 export function TaskDynamic() {
-  const [taskDescription, setTaskDescription] = useState<
-    TaskDynamicInterface[]
-  >([])
-
-  async function loadTask() {
-    const response = await fetch('http://localhost:3333/taskDynamic')
-    const data = await response.json()
-
-    setTaskDescription(data)
-  }
-
-  useEffect(() => {
-    loadTask()
-  }, [])
+  const { taskDescriptionDynamic } = useContext(TaskContext)
 
   return (
     <>
-      {taskDescription.map((item) => {
+      {taskDescriptionDynamic.map((item) => {
         return (
           <section key={item.id}>
             <TaskTime>

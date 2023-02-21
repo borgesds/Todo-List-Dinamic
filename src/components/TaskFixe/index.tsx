@@ -1,20 +1,10 @@
 import { Trash } from 'phosphor-react'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { TaskContext } from '../../contexts/TaskContext'
 import { TaskContainer, TaskContent } from './styles'
 
 export function TaskFixe() {
-  const [taskDescription, setTaskDescription] = useState<TaskInterface[]>([])
-
-  async function loadTask() {
-    const response = await fetch('http://localhost:3333/taskFixe')
-    const data = await response.json()
-
-    setTaskDescription(data)
-  }
-
-  useEffect(() => {
-    loadTask()
-  }, [])
+  const { taskDescriptionFixed } = useContext(TaskContext)
 
   /*  function handleToggleTask(id: number) {
     const taskListCompleted = taskDescription.map((task) => {
@@ -27,7 +17,7 @@ export function TaskFixe() {
 
   return (
     <>
-      {taskDescription.map((item) => {
+      {taskDescriptionFixed.map((item) => {
         return (
           <TaskContainer key={item.id}>
             <TaskContent>

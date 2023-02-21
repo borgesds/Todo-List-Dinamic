@@ -1,7 +1,9 @@
+import { useContext } from 'react'
 import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
 import { TaskDynamic } from '../../components/TaskDynamic'
 import { TaskFixe } from '../../components/TaskFixe'
+import { TaskContext } from '../../contexts/TaskContext'
 import {
   Content,
   CountTaskHeader,
@@ -12,6 +14,18 @@ import {
 } from './styles'
 
 export function Home() {
+  const { taskDescriptionDynamic, taskDescriptionFixed } =
+    useContext(TaskContext)
+
+  // quantidade de tarefa completada
+  const completesFixed = taskDescriptionFixed.filter((task) => {
+    return task.isCompleted !== false
+  })
+
+  const completesDynamic = taskDescriptionDynamic.filter((task) => {
+    return task.isCompleted !== false
+  })
+
   return (
     <Content>
       <Header />
@@ -22,12 +36,14 @@ export function Home() {
             <CountTaskHeader>
               <div>
                 <SpanTaskTitle>Tarefas criadas</SpanTaskTitle>
-                <SpanTaskCount>8</SpanTaskCount>
+                <SpanTaskCount>{taskDescriptionFixed.length}</SpanTaskCount>
               </div>
 
               <div>
                 <SpanTaskTitle>Concluídas</SpanTaskTitle>
-                <SpanTaskCount>2 de 8</SpanTaskCount>
+                <SpanTaskCount>
+                  {completesFixed.length} de {taskDescriptionFixed.length}
+                </SpanTaskCount>
               </div>
             </CountTaskHeader>
 
@@ -38,12 +54,14 @@ export function Home() {
             <CountTaskHeader>
               <div>
                 <SpanTaskTitle>Tarefas criadas</SpanTaskTitle>
-                <SpanTaskCount>8</SpanTaskCount>
+                <SpanTaskCount>{taskDescriptionDynamic.length}</SpanTaskCount>
               </div>
 
               <div>
                 <SpanTaskTitle>Concluídas</SpanTaskTitle>
-                <SpanTaskCount>2 de 8</SpanTaskCount>
+                <SpanTaskCount>
+                  {completesDynamic.length} de {taskDescriptionDynamic.length}
+                </SpanTaskCount>
               </div>
             </CountTaskHeader>
 
