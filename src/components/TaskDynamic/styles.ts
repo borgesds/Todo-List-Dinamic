@@ -32,6 +32,7 @@ export const TaskContent = styled.div`
   input {
     width: 15px;
     height: 15px;
+    cursor: pointer;
   }
 
   label {

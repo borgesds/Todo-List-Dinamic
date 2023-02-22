@@ -27,6 +27,10 @@ export const TaskContent = styled.div`
     font-size: 0.875rem;
   }
 
+  input {
+    cursor: pointer;
+  }
+
   input:checked + label {
     color: ${(props) => props.theme['gray-500']};
     text-decoration: line-through;
