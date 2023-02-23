@@ -1,10 +1,16 @@
 import { Trash } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { TaskContext } from '../../contexts/TaskContext'
 import { TaskContainer, TaskContent, TaskTime } from './styles'
 
 export function TaskDynamic() {
   const { taskDescriptionDynamic } = useContext(TaskContext)
+
+  const [isChecked, setIsChecked] = useState(false)
+
+  function handleCheckboxChange(event: any) {
+    setIsChecked(event.target.checked)
+  }
 
   return (
     <>
@@ -17,7 +23,7 @@ export function TaskDynamic() {
             </TaskTime>
             <TaskContainer>
               <TaskContent>
-                <input type="checkbox" />
+                <input type="checkbox" onChange={handleCheckboxChange} />
                 <label>{item.descriptionTask}</label>
                 <button>
                   <Trash size={24} />

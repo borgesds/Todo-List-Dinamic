@@ -56,7 +56,7 @@ export function NewTaskFixe() {
 
           <form onSubmit={handleSubmit(handleCreateNewTaskFixed)}>
             <input
-              type="text"
+              type="checkbox"
               placeholder="Nova Tarefa"
               required
               {...register('descriptionTask')}

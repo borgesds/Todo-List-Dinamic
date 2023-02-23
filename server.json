@@ -9,6 +9,16 @@
             "id": 2,
             "descriptionTask": "Reunião com a Gerex a 15:00",
             "isCompleted": true
+        },
+        {
+            "id": 3,
+            "descriptionTask": "Dimensionar B2C na parte da manhã",
+            "isCompleted": false
+        },
+        {
+            "id": 4,
+            "descriptionTask": "Dimensionar B2C na parte da manhã",
+            "isCompleted": true
         }
     ],
     "taskDynamic": [
