@@ -5,6 +5,7 @@ import { CloseButton, Content, Overlay } from './styles'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { api } from '../../lib/axios'
 
 /* interface TaskFixe {
   id: number
@@ -14,7 +15,6 @@ import { useForm } from 'react-hook-form'
 
 const newTaskFixedSchema = z.object({
   descriptionTask: z.string(),
-  /* isCompleted: z.enum(['false', 'true']), */
 })
 
 type NewTaskFixedFormInputs = z.infer<typeof newTaskFixedSchema>
@@ -28,8 +28,13 @@ export function NewTaskFixe() {
     resolver: zodResolver(newTaskFixedSchema),
   })
 
-  function handleCreateNewTaskFixed(data: NewTaskFixedFormInputs) {
-    console.log(data)
+  async function handleCreateNewTaskFixed(data: NewTaskFixedFormInputs) {
+    const { descriptionTask } = data
+
+    await api.post('/taskFixe', {
+      descriptionTask,
+      isCompleted: false,
+    })
   }
 
   /* const [TaskFixes, setTaskFixes] = useState<TaskFixe[]>([])
@@ -56,7 +61,7 @@ export function NewTaskFixe() {
 
           <form onSubmit={handleSubmit(handleCreateNewTaskFixed)}>
             <input
-              type="checkbox"
+              type="text"
               placeholder="Nova Tarefa"
               required
               {...register('descriptionTask')}

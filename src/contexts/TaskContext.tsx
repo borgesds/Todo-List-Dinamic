@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
+import { api } from '../lib/axios'
 
 interface TaskInterface {
   id: number
@@ -33,32 +34,33 @@ export function TasksProvider({ children }: TasksProviderProps) {
   >([])
 
   // Task Fixed
-  async function loadTaskFixed() {
-    const response = await fetch('http://localhost:3333/taskFixe')
-    const data = await response.json()
+  async function fetchTaskFixed() {
+    const response = await api.get('/taskFixe')
 
-    setTaskDescriptionFixed(data)
+    setTaskDescriptionFixed(response.data)
   }
 
   useEffect(() => {
-    loadTaskFixed()
+    fetchTaskFixed()
   }, [])
 
   // Task Dynamic
-  async function loadTaskDynamic() {
-    const response = await fetch('http://localhost:3333/taskDynamic')
-    const data = await response.json()
+  async function fetchTaskDynamic() {
+    const response = await api.get('/taskDynamic')
 
-    setTaskDescriptionDynamic(data)
+    setTaskDescriptionDynamic(response.data)
   }
 
   useEffect(() => {
-    loadTaskDynamic()
+    fetchTaskDynamic()
   }, [])
 
   return (
     <TaskContext.Provider
-      value={{ taskDescriptionFixed, taskDescriptionDynamic }}
+      value={{
+        taskDescriptionFixed,
+        taskDescriptionDynamic,
+      }}
     >
       {children}
     </TaskContext.Provider>
