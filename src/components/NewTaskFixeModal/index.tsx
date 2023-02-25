@@ -5,7 +5,8 @@ import { CloseButton, Content, Overlay } from './styles'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { api } from '../../lib/axios'
+import { useContext } from 'react'
+import { TaskContext } from '../../contexts/TaskContext'
 
 /* interface TaskFixe {
   id: number
@@ -20,9 +21,12 @@ const newTaskFixedSchema = z.object({
 type NewTaskFixedFormInputs = z.infer<typeof newTaskFixedSchema>
 
 export function NewTaskFixe() {
+  const { createTaskFixed } = useContext(TaskContext)
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting },
   } = useForm<NewTaskFixedFormInputs>({
     resolver: zodResolver(newTaskFixedSchema),
@@ -31,10 +35,11 @@ export function NewTaskFixe() {
   async function handleCreateNewTaskFixed(data: NewTaskFixedFormInputs) {
     const { descriptionTask } = data
 
-    await api.post('/taskFixe', {
+    await createTaskFixed({
       descriptionTask,
-      isCompleted: false,
     })
+
+    reset()
   }
 
   /* const [TaskFixes, setTaskFixes] = useState<TaskFixe[]>([])

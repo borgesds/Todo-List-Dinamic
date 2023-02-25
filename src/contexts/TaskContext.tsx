@@ -5,6 +5,7 @@ interface TaskInterface {
   id: number
   descriptionTask: string
   isCompleted: boolean
+  createdAt: string
 }
 
 interface TaskInterfaceDynamic {
@@ -14,9 +15,14 @@ interface TaskInterfaceDynamic {
   time: boolean
 }
 
+interface CreateTasksInputFixed {
+  descriptionTask: string
+}
+
 interface TaskContextType {
   taskDescriptionFixed: TaskInterface[]
   taskDescriptionDynamic: TaskInterfaceDynamic[]
+  createTaskFixed: (data: CreateTasksInputFixed) => Promise<void>
 }
 
 interface TasksProviderProps {
@@ -40,10 +46,24 @@ export function TasksProvider({ children }: TasksProviderProps) {
     setTaskDescriptionFixed(response.data)
   }
 
+  // Created tasks fixed
+  async function createTaskFixed(data: CreateTasksInputFixed) {
+    const { descriptionTask } = data
+
+    const response = await api.post('/taskFixe', {
+      descriptionTask,
+      isCompleted: false,
+      createdAt: new Date(),
+    })
+
+    setTaskDescriptionFixed((state) => [response.data, ...state])
+  }
+
   useEffect(() => {
     fetchTaskFixed()
   }, [])
 
+  // --------------------------------
   // Task Dynamic
   async function fetchTaskDynamic() {
     const response = await api.get('/taskDynamic')
@@ -60,6 +80,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
       value={{
         taskDescriptionFixed,
         taskDescriptionDynamic,
+        createTaskFixed,
       }}
     >
       {children}
