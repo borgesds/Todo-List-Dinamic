@@ -1,18 +1,11 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
-/* import { FormEvent, useState } from 'react' */
 import { CloseButton, Content, Overlay } from './styles'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react'
 import { TaskContext } from '../../contexts/TaskContext'
-
-/* interface TaskFixe {
-  id: number
-  descriptionTask: string
-  isCompleted: boolean
-} */
 
 const newTaskFixedSchema = z.object({
   descriptionTask: z.string(),
@@ -41,16 +34,6 @@ export function NewTaskFixe() {
 
     reset()
   }
-
-  /* const [TaskFixes, setTaskFixes] = useState<TaskFixe[]>([])
-
-  const [newTaskText, setNewTaskText] = useState<string>('')
-
-  function handleCreateNewTaskFixe(event: FormEvent) {
-    event.preventDefault()
-
-    setTaskFixes([...TaskFixes, ])
-  } */
 
   return (
     <div>

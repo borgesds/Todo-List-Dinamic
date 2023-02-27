@@ -1,28 +1,45 @@
 import { Trash } from 'phosphor-react'
 import { useContext, useState } from 'react'
 import { TaskContext } from '../../contexts/TaskContext'
-import { TaskContainer, TaskContent } from './styles'
+import {
+  CountTaskHeader,
+  SpanTaskCount,
+  SpanTaskTitle,
+  TaskContainer,
+  TaskContent,
+} from './styles'
 
 export function TaskFixe() {
   const { taskDescriptionFixed } = useContext(TaskContext)
 
+  // quantidade de tarefa completada
+  const completesFixed = taskDescriptionFixed.filter((task) => {
+    return task.isCompleted !== false
+  })
+
   const [isChecked, setIsChecked] = useState(false)
+  console.log(isChecked)
 
   function handleCheckboxChange(event: any) {
     setIsChecked(event.target.checked)
   }
 
-  /*  function handleToggleTask(id: number) {
-    const taskListCompleted = taskDescription.map((task) => {
-      if (task.id === id) {
-        taskDescription.isCompleted = !task.isCompleted
-      }
-      return taskDescription
-    })
-  } */
-
   return (
     <>
+      <CountTaskHeader>
+        <div>
+          <SpanTaskTitle>Tarefas criadas</SpanTaskTitle>
+          <SpanTaskCount>{taskDescriptionFixed.length}</SpanTaskCount>
+        </div>
+
+        <div>
+          <SpanTaskTitle>Concluídas</SpanTaskTitle>
+          <SpanTaskCount>
+            {completesFixed.length} de {taskDescriptionFixed.length}
+          </SpanTaskCount>
+        </div>
+      </CountTaskHeader>
+
       {taskDescriptionFixed.map((item) => {
         return (
           <TaskContainer key={item.id}>

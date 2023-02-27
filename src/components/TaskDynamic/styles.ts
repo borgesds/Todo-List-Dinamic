@@ -56,3 +56,26 @@ export const TaskContent = styled.div`
     }
   }
 `
+
+export const CountTaskHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+`
+
+export const SpanTaskTitle = styled.span`
+  color: ${(props) => props.theme['blue-300']};
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+`
+
+export const SpanTaskCount = styled.span`
+  color: ${(props) => props.theme['gray-300']};
+  background: ${(props) => props.theme['gray-600']};
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 6px;
+`

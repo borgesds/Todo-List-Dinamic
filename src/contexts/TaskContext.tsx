@@ -9,20 +9,27 @@ interface TaskInterface {
 }
 
 interface TaskInterfaceDynamic {
+  timeAt: ReactNode
   id: number
   descriptionTask: string
   isCompleted: boolean
-  time: boolean
+  createdAt: string
 }
 
 interface CreateTasksInputFixed {
   descriptionTask: string
 }
 
+interface CreateTasksInputDynamic {
+  descriptionTask: string
+  timeAt: string
+}
+
 interface TaskContextType {
   taskDescriptionFixed: TaskInterface[]
   taskDescriptionDynamic: TaskInterfaceDynamic[]
   createTaskFixed: (data: CreateTasksInputFixed) => Promise<void>
+  createTaskDynamic: (data: CreateTasksInputDynamic) => Promise<void>
 }
 
 interface TasksProviderProps {
@@ -63,12 +70,38 @@ export function TasksProvider({ children }: TasksProviderProps) {
     fetchTaskFixed()
   }, [])
 
-  // --------------------------------
+  // ----------------------------------------------------------------
+
   // Task Dynamic
   async function fetchTaskDynamic() {
     const response = await api.get('/taskDynamic')
 
     setTaskDescriptionDynamic(response.data)
+  }
+
+  // Created tasks fixed
+  async function createTaskDynamic(data: CreateTasksInputDynamic) {
+    const { descriptionTask, timeAt } = data
+
+    const response = await api.post('/taskDynamic', {
+      descriptionTask,
+      timeAt,
+      isCompleted: false,
+      createdAt: new Date(),
+    })
+
+    setTaskDescriptionDynamic((state) => [response.data, ...state])
+
+    /* const { descriptionTask, time } = data
+
+    const response = await api.post('/taskDynamic', {
+      descriptionTask,
+      time,
+      isCompleted: false,
+      createdAt: new Date(),
+    })
+
+    setTaskDescriptionDynamic((state) => [response.data, ...state]) */
   }
 
   useEffect(() => {
@@ -81,6 +114,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
         taskDescriptionFixed,
         taskDescriptionDynamic,
         createTaskFixed,
+        createTaskDynamic,
       }}
     >
       {children}
