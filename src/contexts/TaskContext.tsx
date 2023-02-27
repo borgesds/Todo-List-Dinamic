@@ -46,6 +46,20 @@ export function TasksProvider({ children }: TasksProviderProps) {
     TaskInterfaceDynamic[]
   >([])
 
+  // Date creation
+  const agora = new Date()
+
+  const dia = agora.getDate().toString().padStart(2, '0')
+  const mes = (agora.getMonth() + 1).toString().padStart(2, '0')
+  const ano = agora.getFullYear().toString().padStart(4, '0')
+  const hora = agora.getHours().toString().padStart(2, '0')
+  const minutos = agora.getMinutes().toString().padStart(2, '0')
+  const segundos = agora.getSeconds().toString().padStart(2, '0')
+
+  // Concatenate timeand date
+  const dataHoraFormatada =
+    dia + '/' + mes + '/' + ano + ' ' + hora + ':' + minutos + ':' + segundos
+
   // Task Fixed
   async function fetchTaskFixed() {
     const response = await api.get('/taskFixe')
@@ -60,7 +74,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
     const response = await api.post('/taskFixe', {
       descriptionTask,
       isCompleted: false,
-      createdAt: new Date(),
+      createdAt: dataHoraFormatada,
     })
 
     setTaskDescriptionFixed((state) => [response.data, ...state])
@@ -87,21 +101,10 @@ export function TasksProvider({ children }: TasksProviderProps) {
       descriptionTask,
       timeAt,
       isCompleted: false,
-      createdAt: new Date(),
+      createdAt: dataHoraFormatada,
     })
 
     setTaskDescriptionDynamic((state) => [response.data, ...state])
-
-    /* const { descriptionTask, time } = data
-
-    const response = await api.post('/taskDynamic', {
-      descriptionTask,
-      time,
-      isCompleted: false,
-      createdAt: new Date(),
-    })
-
-    setTaskDescriptionDynamic((state) => [response.data, ...state]) */
   }
 
   useEffect(() => {
