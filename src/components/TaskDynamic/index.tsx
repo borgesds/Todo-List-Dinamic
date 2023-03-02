@@ -13,12 +13,12 @@ import {
 export function TaskDynamic() {
   const { taskDescriptionDynamic } = useContext(TaskContext)
 
-  const [isChecked, setIsChecked] = useState(false)
+  /*  const [isChecked, setIsChecked] = useState(false)
   console.log(isChecked)
 
   function handleCheckboxChange(event: any) {
     setIsChecked(event.target.checked)
-  }
+  } */
 
   // quantidade de tarefa completada
   const completesDynamic = taskDescriptionDynamic.filter((task) => {
@@ -49,7 +49,7 @@ export function TaskDynamic() {
             </TaskTime>
             <TaskContainer>
               <TaskContent>
-                <input type="checkbox" onChange={handleCheckboxChange} />
+                <input type="checkbox" /* onChange={handleCheckboxChange} */ />
                 <label>{item.descriptionTask}</label>
                 <button>
                   <Trash size={24} />

@@ -17,12 +17,12 @@ export function TaskFixe() {
     return task.isCompleted !== false
   })
 
-  const [isChecked, setIsChecked] = useState(false)
+  /* const [isChecked, setIsChecked] = useState(false)
   console.log(isChecked)
 
   function handleCheckboxChange(event: any) {
     setIsChecked(event.target.checked)
-  }
+  } */
 
   return (
     <>
@@ -44,7 +44,7 @@ export function TaskFixe() {
         return (
           <TaskContainer key={item.id}>
             <TaskContent>
-              <input type="checkbox" onChange={handleCheckboxChange} />
+              <input type="checkbox" /* onChange={handleCheckboxChange} */ />
               <label>{item.descriptionTask}</label>
               <button>
                 <Trash size={24} />

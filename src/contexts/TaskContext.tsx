@@ -56,7 +56,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
   const minutos = agora.getMinutes().toString().padStart(2, '0')
   const segundos = agora.getSeconds().toString().padStart(2, '0')
 
-  // Concatenate timeand date
+  // Concatenate time and date
   const dataHoraFormatada =
     dia + '/' + mes + '/' + ano + ' ' + hora + ':' + minutos + ':' + segundos
 
@@ -78,6 +78,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
     })
 
     setTaskDescriptionFixed((state) => [response.data, ...state])
+    console.log(response.data)
   }
 
   useEffect(() => {
@@ -85,7 +86,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
   }, [])
 
   // ----------------------------------------------------------------
-
+/* 
   // Task Dynamic
   async function fetchTaskDynamic() {
     const response = await api.get('/taskDynamic')
@@ -109,7 +110,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   useEffect(() => {
     fetchTaskDynamic()
-  }, [])
+  }, []) */
 
   return (
     <TaskContext.Provider
@@ -117,10 +118,12 @@ export function TasksProvider({ children }: TasksProviderProps) {
         taskDescriptionFixed,
         taskDescriptionDynamic,
         createTaskFixed,
-        createTaskDynamic,
+        
       }}
     >
       {children}
     </TaskContext.Provider>
   )
 }
+
+/* createTaskDynamic, */

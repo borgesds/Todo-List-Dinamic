@@ -19,8 +19,8 @@ export function NewTaskFixe() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { isSubmitting },
+    reset,
   } = useForm<NewTaskFixedFormInputs>({
     resolver: zodResolver(newTaskFixedSchema),
   })
