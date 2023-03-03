@@ -77,8 +77,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
       createdAt: dataHoraFormatada,
     })
 
-    setTaskDescriptionFixed((state) => [response.data, ...state])
-    console.log(response.data)
+    setTaskDescriptionFixed(response.data)
   }
 
   useEffect(() => {
