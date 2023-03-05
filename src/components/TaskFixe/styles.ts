@@ -11,7 +11,7 @@ export const TaskContainer = styled.section`
   margin-bottom: 0.75rem;
 `
 
-export const TaskContent = styled.div`
+export const TaskContent = styled.form`
   position: relative;
   display: flex;
   justify-content: space-between;

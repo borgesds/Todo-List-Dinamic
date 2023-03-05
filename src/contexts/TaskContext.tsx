@@ -70,6 +70,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
   // Created tasks fixed
   async function createTaskFixed(data: CreateTasksInputFixed) {
     const { descriptionTask } = data
+
     await api.post('/taskFixed', {
       descriptionTask,
       isCompleted: false,

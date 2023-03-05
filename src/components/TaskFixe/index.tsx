@@ -1,6 +1,8 @@
 import { Trash } from 'phosphor-react'
 import { useContext, useState } from 'react'
+import { z } from 'zod'
 import { TaskContext } from '../../contexts/TaskContext'
+import { api } from '../../lib/axios'
 import {
   CountTaskHeader,
   SpanTaskCount,
@@ -9,20 +11,37 @@ import {
   TaskContent,
 } from './styles'
 
+const updateTaskFixedSchema = z.object({
+  id: z.string(),
+  isCompleted: z.boolean(),
+})
+
+type UpdateTaskFixedFormInputs = z.infer<typeof updateTaskFixedSchema>
+
 export function TaskFixe() {
   const { taskDescriptionFixed } = useContext(TaskContext)
+
+  const [isChecked, setIsChecked] = useState(false)
+
+  const handleCheckboxChange = (event: any) => {
+    setIsChecked(event.target.checked)
+  }
+
+  // Update isCompleted
+  async function handleCheckboxUpdate(data: UpdateTaskFixedFormInputs) {
+    const { id, isCompleted } = data
+
+    await api.patch('/taskFixed/completed', {
+      id,
+      isCompleted,
+    })
+  }
 
   // quantidade de tarefa completada
   const completesFixed = taskDescriptionFixed.filter((task) => {
     return task.isCompleted !== false
   })
-
-  /* const [isChecked, setIsChecked] = useState(false)
-  console.log(isChecked)
-
-  function handleCheckboxChange(event: any) {
-    setIsChecked(event.target.checked)
-  } */
+  console.log(completesFixed)
 
   return (
     <>
@@ -40,11 +59,15 @@ export function TaskFixe() {
         </div>
       </CountTaskHeader>
 
-      {taskDescriptionFixed.map((item, index) => {
+      {taskDescriptionFixed.map((item) => {
         return (
-          <TaskContainer key={index}>
-            <TaskContent>
-              <input type="checkbox" /* onChange={handleCheckboxChange} */ />
+          <TaskContainer key={item.id}>
+            <TaskContent onSubmit={handleCheckboxUpdate}>
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+              />
               <label>{item.descriptionTask}</label>
               <button>
                 <Trash size={24} />
