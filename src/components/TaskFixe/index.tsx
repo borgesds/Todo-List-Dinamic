@@ -40,9 +40,9 @@ export function TaskFixe() {
         </div>
       </CountTaskHeader>
 
-      {taskDescriptionFixed.map((item) => {
+      {taskDescriptionFixed.map((item, index) => {
         return (
-          <TaskContainer key={item.id}>
+          <TaskContainer key={index}>
             <TaskContent>
               <input type="checkbox" /* onChange={handleCheckboxChange} */ />
               <label>{item.descriptionTask}</label>

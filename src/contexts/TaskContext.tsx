@@ -62,7 +62,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   // Task Fixed
   async function fetchTaskFixed() {
-    const response = await api.get('/taskFixe')
+    const response = await api.get('/taskFixed')
 
     setTaskDescriptionFixed(response.data)
   }
@@ -70,14 +70,13 @@ export function TasksProvider({ children }: TasksProviderProps) {
   // Created tasks fixed
   async function createTaskFixed(data: CreateTasksInputFixed) {
     const { descriptionTask } = data
-
-    const response = await api.post('/taskFixe', {
+    await api.post('/taskFixed', {
       descriptionTask,
       isCompleted: false,
       createdAt: dataHoraFormatada,
     })
 
-    setTaskDescriptionFixed(response.data)
+    fetchTaskFixed()
   }
 
   useEffect(() => {
@@ -85,15 +84,15 @@ export function TasksProvider({ children }: TasksProviderProps) {
   }, [])
 
   // ----------------------------------------------------------------
-/* 
+  /* 
   // Task Dynamic
-  async function fetchTaskDynamic() {
+  async function fetchTaskDynamic() 
     const response = await api.get('/taskDynamic')
 
     setTaskDescriptionDynamic(response.data)
   }
 
-  // Created tasks fixed
+  // Created tasks Dynamic
   async function createTaskDynamic(data: CreateTasksInputDynamic) {
     const { descriptionTask, timeAt } = data
 
@@ -117,7 +116,6 @@ export function TasksProvider({ children }: TasksProviderProps) {
         taskDescriptionFixed,
         taskDescriptionDynamic,
         createTaskFixed,
-        
       }}
     >
       {children}
