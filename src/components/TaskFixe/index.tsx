@@ -1,5 +1,5 @@
 import { Trash } from 'phosphor-react'
-import { useContext, useState } from 'react'
+import { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import { z } from 'zod'
 import { TaskContext } from '../../contexts/TaskContext'
 import { api } from '../../lib/axios'
@@ -11,23 +11,25 @@ import {
   TaskContent,
 } from './styles'
 
-const updateTaskFixedSchema = z.object({
-  id: z.string(),
-  isCompleted: z.boolean(),
-})
-
-type UpdateTaskFixedFormInputs = z.infer<typeof updateTaskFixedSchema>
+interface updateTaskFixedSchema {
+  id: number
+  descriptionTask: string
+  isCompleted: boolean
+}
 
 export function TaskFixe() {
   const { taskDescriptionFixed } = useContext(TaskContext)
 
-  const [isChecked, setIsChecked] = useState(false)
-
-  const handleCheckboxChange = (event: any) => {
-    setIsChecked(event.target.checked)
+  // onChange => captura valor
+  const handleCheckboxChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    id: number,
+  ) => {
+    const isChecked = event.target.checked
+    console.log(`Tarefa ${id} foi ${isChecked ? 'marcada' : 'desmarcada'}`)
   }
 
-  // Update isCompleted
+  /* // Update isCompleted
   async function handleCheckboxUpdate(data: UpdateTaskFixedFormInputs) {
     const { id, isCompleted } = data
 
@@ -35,7 +37,7 @@ export function TaskFixe() {
       id,
       isCompleted,
     })
-  }
+  } */
 
   // quantidade de tarefa completada
   const completesFixed = taskDescriptionFixed.filter((task) => {
@@ -62,11 +64,10 @@ export function TaskFixe() {
       {taskDescriptionFixed.map((item) => {
         return (
           <TaskContainer key={item.id}>
-            <TaskContent onSubmit={handleCheckboxUpdate}>
+            <TaskContent>
               <input
                 type="checkbox"
-                checked={isChecked}
-                onChange={handleCheckboxChange}
+                onChange={(event) => handleCheckboxChange(event, item.id)}
               />
               <label>{item.descriptionTask}</label>
               <button>
