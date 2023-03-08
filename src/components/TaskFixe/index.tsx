@@ -1,6 +1,5 @@
 import { Trash } from 'phosphor-react'
-import { ChangeEvent, FormEvent, useContext, useState } from 'react'
-import { z } from 'zod'
+import { ChangeEvent, useContext } from 'react'
 import { TaskContext } from '../../contexts/TaskContext'
 import { api } from '../../lib/axios'
 import {
@@ -11,39 +10,45 @@ import {
   TaskContent,
 } from './styles'
 
-interface updateTaskFixedSchema {
+interface updateTaskFixed {
   id: number
-  descriptionTask: string
   isCompleted: boolean
 }
 
 export function TaskFixe() {
   const { taskDescriptionFixed } = useContext(TaskContext)
 
+  // Update isCompleted
+  async function handleCheckboxUpdate(data: updateTaskFixed) {
+    const { id, isCompleted } = data
+
+    await api.patch('/completed', {
+      id,
+      isCompleted,
+    })
+  }
+
   // onChange => captura valor
   const handleCheckboxChange = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
   ) => {
-    const isChecked = event.target.checked
-    console.log(`Tarefa ${id} foi ${isChecked ? 'marcada' : 'desmarcada'}`)
+    const isCompleted = event.target.checked
+    const data: updateTaskFixed = { id, isCompleted }
+
+    if (isCompleted) {
+      handleCheckboxUpdate(data)
+      console.log(data)
+    } else {
+      handleCheckboxUpdate(data)
+      console.log(data)
+    }
   }
-
-  /* // Update isCompleted
-  async function handleCheckboxUpdate(data: UpdateTaskFixedFormInputs) {
-    const { id, isCompleted } = data
-
-    await api.patch('/taskFixed/completed', {
-      id,
-      isCompleted,
-    })
-  } */
 
   // quantidade de tarefa completada
   const completesFixed = taskDescriptionFixed.filter((task) => {
     return task.isCompleted !== false
   })
-  console.log(completesFixed)
 
   return (
     <>
