@@ -16,7 +16,7 @@ interface updateTaskFixed {
 }
 
 export function TaskFixe() {
-  const { taskDescriptionFixed } = useContext(TaskContext)
+  const { taskDescriptionFixed, fetchTaskFixed } = useContext(TaskContext)
 
   // Update isCompleted
   async function handleCheckboxUpdate(data: updateTaskFixed) {
@@ -43,6 +43,12 @@ export function TaskFixe() {
       handleCheckboxUpdate(data)
       console.log(data)
     }
+  }
+
+  async function handleDelete(id: number) {
+    await api.delete(`/deleted/${id}`)
+
+    fetchTaskFixed()
   }
 
   // quantidade de tarefa completada
@@ -75,7 +81,7 @@ export function TaskFixe() {
                 onChange={(event) => handleCheckboxChange(event, item.id)}
               />
               <label>{item.descriptionTask}</label>
-              <button>
+              <button onClick={() => handleDelete(item.id)}>
                 <Trash size={24} />
               </button>
             </TaskContent>

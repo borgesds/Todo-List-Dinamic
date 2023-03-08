@@ -28,6 +28,7 @@ interface CreateTasksInputDynamic {
 interface TaskContextType {
   taskDescriptionFixed: TaskInterface[]
   taskDescriptionDynamic: TaskInterfaceDynamic[]
+  fetchTaskFixed: () => Promise<void>
   createTaskFixed: (data: CreateTasksInputFixed) => Promise<void>
   createTaskDynamic: (data: CreateTasksInputDynamic) => Promise<void>
 }
@@ -117,6 +118,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
         taskDescriptionFixed,
         taskDescriptionDynamic,
         createTaskFixed,
+        fetchTaskFixed,
       }}
     >
       {children}
