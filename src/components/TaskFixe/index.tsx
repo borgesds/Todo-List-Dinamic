@@ -38,13 +38,12 @@ export function TaskFixe() {
 
     if (isCompleted) {
       handleCheckboxUpdate(data)
-      console.log(data)
     } else {
       handleCheckboxUpdate(data)
-      console.log(data)
     }
   }
 
+  // Delete task
   async function handleDelete(id: number) {
     await api.delete(`/deleted/${id}`)
 
@@ -53,8 +52,9 @@ export function TaskFixe() {
 
   // quantidade de tarefa completada
   const completesFixed = taskDescriptionFixed.filter((task) => {
-    return task.isCompleted !== false
+    return task.isCompleted === true
   })
+  console.log(completesFixed)
 
   return (
     <>
