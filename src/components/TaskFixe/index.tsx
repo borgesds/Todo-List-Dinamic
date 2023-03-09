@@ -52,9 +52,9 @@ export function TaskFixe() {
 
   // quantidade de tarefa completada
   const completesFixed = taskDescriptionFixed.filter((task) => {
-    return task.isCompleted === true
+    return console.log(task.isCompleted === true)
   })
-  console.log(completesFixed)
+ 
 
   return (
     <>
