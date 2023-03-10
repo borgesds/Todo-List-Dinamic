@@ -26,6 +26,8 @@ export function TaskFixe() {
       id,
       isCompleted,
     })
+
+    fetchTaskFixed()
   }
 
   // onChange => captura valor
@@ -52,9 +54,8 @@ export function TaskFixe() {
 
   // quantidade de tarefa completada
   const completesFixed = taskDescriptionFixed.filter((task) => {
-    return console.log(task.isCompleted === true)
+    return task.isCompleted
   })
- 
 
   return (
     <>
@@ -78,6 +79,7 @@ export function TaskFixe() {
             <TaskContent>
               <input
                 type="checkbox"
+                checked={item.isCompleted}
                 onChange={(event) => handleCheckboxChange(event, item.id)}
               />
               <label>{item.descriptionTask}</label>
