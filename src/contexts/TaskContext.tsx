@@ -29,6 +29,7 @@ interface TaskContextType {
   taskDescriptionFixed: TaskInterface[]
   taskDescriptionDynamic: TaskInterfaceDynamic[]
   fetchTaskFixed: () => Promise<void>
+  fetchTaskDynamic: () => Promise<void>
   createTaskFixed: (data: CreateTasksInputFixed) => Promise<void>
   createTaskDynamic: (data: CreateTasksInputDynamic) => Promise<void>
 }
@@ -86,7 +87,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
   }, [])
 
   // ----------------------------------------------------------------
-  /* 
+  
   // Task Dynamic
   async function fetchTaskDynamic() 
     const response = await api.get('/taskDynamic')
@@ -110,7 +111,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   useEffect(() => {
     fetchTaskDynamic()
-  }, []) */
+  }, [])
 
   return (
     <TaskContext.Provider
@@ -119,11 +120,11 @@ export function TasksProvider({ children }: TasksProviderProps) {
         taskDescriptionDynamic,
         createTaskFixed,
         fetchTaskFixed,
+        createTaskDynamic,
+        fetchTaskDynamic,
       }}
     >
       {children}
     </TaskContext.Provider>
   )
 }
-
-/* createTaskDynamic, */
