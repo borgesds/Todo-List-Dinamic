@@ -1,5 +1,5 @@
 import { Trash } from 'phosphor-react'
-import { ChangeEvent, useContext } from 'react'
+import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { TaskContext } from '../../contexts/TaskContext'
 import { api } from '../../lib/axios'
 import {
@@ -18,6 +18,9 @@ interface updateTaskDynamic {
 
 export function TaskDynamic() {
   const { taskDescriptionDynamic, fetchTaskDynamic } = useContext(TaskContext)
+
+  // Time Left
+  const [timeLeft, setTimeLeft] = useState<string>('')
 
   // Update isCompleted
   async function handleCheckboxUpdate(data: updateTaskDynamic) {
@@ -57,6 +60,48 @@ export function TaskDynamic() {
   const completesDynamic = taskDescriptionDynamic.filter((task) => {
     return task.isCompleted
   })
+
+  /* Time Task Countdown */
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const diff =
+        new Date(
+          taskDescriptionDynamic.map((itemTime) => {
+            itemTime.timeAt
+          }),
+        ).getTime() - new Date().getTime()
+
+      if (diff <= 0) {
+        // Conclusion time!
+        clearInterval(intervalId)
+        setTimeLeft('Concluído')
+        alert('O tempo da sua tarefa foi finalizado!')
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+        const hours = Math.floor(
+          (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        ).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+        const minutes = Math.floor(
+          (diff % (1000 * 60 * 60)) / (1000 * 60),
+        ).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000).toLocaleString(
+          undefined,
+          { minimumIntegerDigits: 2 },
+        )
+
+        // Verification time
+        if (days > 0) {
+          const result = `${days} dias`
+          setTimeLeft(result)
+        } else {
+          const result = `${hours} : ${minutes} : ${seconds}`
+          setTimeLeft(result)
+        }
+      }
+    }, 1000)
+
+    return () => clearInterval(intervalId)
+  }, [])
 
   return (
     <>
