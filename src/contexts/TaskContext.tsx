@@ -9,9 +9,9 @@ interface TaskInterface {
 }
 
 interface TaskInterfaceDynamic {
-  timeAt: ReactNode
   id: number
   descriptionTask: string
+  timeAt: string
   isCompleted: boolean
   createdAt: string
 }
@@ -49,18 +49,18 @@ export function TasksProvider({ children }: TasksProviderProps) {
   >([])
 
   // Date creation
-  const agora = new Date()
+  const now = new Date()
 
-  const dia = agora.getDate().toString().padStart(2, '0')
-  const mes = (agora.getMonth() + 1).toString().padStart(2, '0')
-  const ano = agora.getFullYear().toString().padStart(4, '0')
-  const hora = agora.getHours().toString().padStart(2, '0')
-  const minutos = agora.getMinutes().toString().padStart(2, '0')
-  const segundos = agora.getSeconds().toString().padStart(2, '0')
+  const day = now.getDate().toString().padStart(2, '0')
+  const month = (now.getMonth() + 1).toString().padStart(2, '0')
+  const age = now.getFullYear().toString().padStart(4, '0')
+  const hour = now.getHours().toString().padStart(2, '0')
+  const minutes = now.getMinutes().toString().padStart(2, '0')
+  const secund = now.getSeconds().toString().padStart(2, '0')
 
   // Concatenate time and date
-  const dataHoraFormatada =
-    dia + '/' + mes + '/' + ano + ' ' + hora + ':' + minutos + ':' + segundos
+  const formattedDateTime =
+    day + '/' + month + '/' + age + ' ' + hour + ':' + minutes + ':' + secund
 
   // Task Fixed
   async function fetchTaskFixed() {
@@ -76,7 +76,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
     await api.post('/taskFixed', {
       descriptionTask,
       isCompleted: false,
-      createdAt: dataHoraFormatada,
+      createdAt: formattedDateTime,
     })
 
     fetchTaskFixed()
@@ -86,10 +86,10 @@ export function TasksProvider({ children }: TasksProviderProps) {
     fetchTaskFixed()
   }, [])
 
-  // ----------------------------------------------------------------
-  
+  // ------------------------------------------------------------------------
+
   // Task Dynamic
-  async function fetchTaskDynamic() 
+  async function fetchTaskDynamic() {
     const response = await api.get('/taskDynamic')
 
     setTaskDescriptionDynamic(response.data)
@@ -99,14 +99,14 @@ export function TasksProvider({ children }: TasksProviderProps) {
   async function createTaskDynamic(data: CreateTasksInputDynamic) {
     const { descriptionTask, timeAt } = data
 
-    const response = await api.post('/taskDynamic', {
+    await api.post('/taskDynamic', {
       descriptionTask,
       timeAt,
       isCompleted: false,
-      createdAt: dataHoraFormatada,
+      createdAt: formattedDateTime,
     })
 
-    setTaskDescriptionDynamic((state) => [response.data, ...state])
+    fetchTaskDynamic()
   }
 
   useEffect(() => {
@@ -119,8 +119,8 @@ export function TasksProvider({ children }: TasksProviderProps) {
         taskDescriptionFixed,
         taskDescriptionDynamic,
         createTaskFixed,
-        fetchTaskFixed,
         createTaskDynamic,
+        fetchTaskFixed,
         fetchTaskDynamic,
       }}
     >

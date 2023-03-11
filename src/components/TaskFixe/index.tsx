@@ -22,7 +22,7 @@ export function TaskFixe() {
   async function handleCheckboxUpdate(data: updateTaskFixed) {
     const { id, isCompleted } = data
 
-    await api.patch('/completed', {
+    await api.patch('/completed/fixed', {
       id,
       isCompleted,
     })

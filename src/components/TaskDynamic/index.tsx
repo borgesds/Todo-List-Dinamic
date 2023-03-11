@@ -1,6 +1,7 @@
 import { Trash } from 'phosphor-react'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { TaskContext } from '../../contexts/TaskContext'
+import { api } from '../../lib/axios'
 import {
   CountTaskHeader,
   SpanTaskCount,
@@ -10,15 +11,23 @@ import {
   TaskTime,
 } from './styles'
 
+interface updateTaskDynamic {
+  id: number
+  isCompleted: boolean
+}
+
 export function TaskDynamic() {
-  const { taskDescriptionDynamic } = useContext(TaskContext)
+  const { taskDescriptionDynamic, fetchTaskDynamic } = useContext(TaskContext)
 
-  /*  const [isChecked, setIsChecked] = useState(false)
-  console.log(isChecked)
+  // Update isCompleted
+  async function handleCheckboxUpdate(data: updateTaskDynamic) {
+    const { id, isCompleted } = data
 
-  function handleCheckboxChange(event: any) {
-    setIsChecked(event.target.checked)
-  } */
+    await api.put(`/completed/Dynamic`, {
+      id,
+      isCompleted,
+    })
+  }
 
   // quantidade de tarefa completada
   const completesDynamic = taskDescriptionDynamic.filter((task) => {
@@ -49,7 +58,7 @@ export function TaskDynamic() {
             </TaskTime>
             <TaskContainer>
               <TaskContent>
-                <input type="checkbox" /* onChange={handleCheckboxChange} */ />
+                <input type="checkbox" /* onChange={handleCheckboxChange}  *//>
                 <label>{item.descriptionTask}</label>
                 <button>
                   <Trash size={24} />
