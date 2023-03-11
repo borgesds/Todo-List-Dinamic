@@ -16,11 +16,21 @@ interface updateTaskDynamic {
   isCompleted: boolean
 }
 
+interface TaskWithTimeLeft {
+  id: number
+  descriptionTask: string
+  isCompleted: boolean
+  timeAt: string
+  timeLeft?: string
+}
+
 export function TaskDynamic() {
   const { taskDescriptionDynamic, fetchTaskDynamic } = useContext(TaskContext)
 
   // Time Left
-  const [timeLeft, setTimeLeft] = useState<string>('')
+  const [tasksWithTimeLeft, setTasksWithTimeLeft] = useState<
+    TaskWithTimeLeft[]
+  >([])
 
   // Update isCompleted
   async function handleCheckboxUpdate(data: updateTaskDynamic) {
@@ -62,46 +72,53 @@ export function TaskDynamic() {
   })
 
   /* Time Task Countdown */
+  // Calculate time left for each task
   useEffect(() => {
+    const updateTasksWithTimeLeft = () => {
+      const newTasksWithTimeLeft: TaskWithTimeLeft[] =
+        taskDescriptionDynamic.map((task) => {
+          const diff = new Date(task.timeAt).getTime() - new Date().getTime()
+
+          if (diff <= 0) {
+            return {
+              ...task,
+              timeLeft: 'Concluído',
+            }
+          } else {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+            const hours = Math.floor(
+              (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+            ).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+            const minutes = Math.floor(
+              (diff % (1000 * 60 * 60)) / (1000 * 60),
+            ).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+            const seconds = Math.floor(
+              (diff % (1000 * 60)) / 1000,
+            ).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+
+            let timeLeft = ''
+            if (days > 0) {
+              timeLeft = `${days} dias`
+            } else {
+              timeLeft = `${hours}:${minutes}:${seconds}`
+            }
+
+            return {
+              ...task,
+              timeLeft,
+            }
+          }
+        })
+      setTasksWithTimeLeft(newTasksWithTimeLeft)
+    }
+
+    updateTasksWithTimeLeft()
+
     const intervalId = setInterval(() => {
-      const diff =
-        new Date(
-          taskDescriptionDynamic.map((itemTime) => {
-            itemTime.timeAt
-          }),
-        ).getTime() - new Date().getTime()
-
-      if (diff <= 0) {
-        // Conclusion time!
-        clearInterval(intervalId)
-        setTimeLeft('Concluído')
-        alert('O tempo da sua tarefa foi finalizado!')
-      } else {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24))
-        const hours = Math.floor(
-          (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        ).toLocaleString(undefined, { minimumIntegerDigits: 2 })
-        const minutes = Math.floor(
-          (diff % (1000 * 60 * 60)) / (1000 * 60),
-        ).toLocaleString(undefined, { minimumIntegerDigits: 2 })
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000).toLocaleString(
-          undefined,
-          { minimumIntegerDigits: 2 },
-        )
-
-        // Verification time
-        if (days > 0) {
-          const result = `${days} dias`
-          setTimeLeft(result)
-        } else {
-          const result = `${hours} : ${minutes} : ${seconds}`
-          setTimeLeft(result)
-        }
-      }
+      updateTasksWithTimeLeft()
     }, 1000)
-
     return () => clearInterval(intervalId)
-  }, [])
+  }, [taskDescriptionDynamic])
 
   return (
     <>
@@ -118,12 +135,12 @@ export function TaskDynamic() {
           </SpanTaskCount>
         </div>
       </CountTaskHeader>
-      {taskDescriptionDynamic.map((item) => {
+      {tasksWithTimeLeft.map((item) => {
         return (
           <section key={item.id}>
             <TaskTime>
               <span>Tempo da tarefa:</span>
-              <span>{item.timeAt} Horas</span>
+              <span id="time">{item.timeLeft}</span>
             </TaskTime>
             <TaskContainer>
               <TaskContent>

@@ -9,6 +9,7 @@ interface TaskInterface {
 }
 
 interface TaskInterfaceDynamic {
+  timeLeft: ReactNode
   id: number
   descriptionTask: string
   timeAt: string

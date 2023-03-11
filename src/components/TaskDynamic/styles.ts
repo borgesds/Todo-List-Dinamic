@@ -21,6 +21,10 @@ export const TaskTime = styled.div`
     padding: 0.5rem;
     color: ${(props) => props.theme['gray-500']};
   }
+
+  span#time {
+    color: ${(props) => props.theme['blue-300']};
+  }
 `
 
 export const TaskContent = styled.div`
