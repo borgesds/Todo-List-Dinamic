@@ -30,7 +30,7 @@ export function TaskFixe() {
     fetchTaskFixed()
   }
 
-  // onChange => captura valor
+  // OnChange => capture value
   const handleCheckboxChange = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
